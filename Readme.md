@@ -23,48 +23,46 @@ Ask clinical staff members how they would record suicide attempt in this particu
 
 
 
-
+***************
 I'll list out the terms / phrases i extracted from each "exercise", i've listed above. 
 
 
-####Using key clinical codes
+#### 1) Using key clinical codes
 
 Here's the list of ICD-9, ICD-CM and ICD-10 codes from the WHO ICD website. These codes have also been used in suicide epidemiology literature. 
 
+**_Screenshot 1_**
 ![ICD 9 and ICD-CM codes] (https://cloud.githubusercontent.com/assets/10629155/12849801/76f9833a-cc19-11e5-84c7-84440811e8f3.png) 
 
-
+**_Screenshot 2_**
 ![ICD10 Code Screenshot](https://cloud.githubusercontent.com/assets/10629155/12849775/4f10d594-cc19-11e5-90df-b5048e0b2a89.png)
 
  
 
 
-**Key Terms derived form the ICD codes that could potentially indicate a Suicide Attempt**		self-inflict*
+**From the lists in Figure 1 and 2, here are the Key Terms I derived to highlight or flag up a suicide attempt****_List derived from ICD 9, ICD 9 CM and ICD 10 codes in Screenshots above_**
+		self-inflict*
 		self inflict*
 		poison*
 		self-poison*
 		self poison*		hang*		strangl*		strangu*		submer*		cut*		jump*		asphyxiat*		overdose		ingested*		suffocat*		drown*		handgun		rifle		shotgun		lying before		crash*		firearm*		pierc* 		shoot*		stab*		shot		tried to cut [him/her] self		took an overdose		took an OD		tried to poison [him/her] self		tried to suffocate [him/her]self		tried to strangle [him/her]self
 		self-damag*
-		self damag*
-
-**ICD-9 codes**
-		E950		E951 to E952		E953		E954		E955		E956		E957		E958		E959		E980 - E989		E850 - E858
+		self damag*		E950		E951 to E952		E953		E954		E955		E956		E957		E958		E959		E980 - E989		E850 - E858
 		994.7
-		960 - 977**ICD-10 codes** 
-		X60		X61		X62		X63		X64		X65		X66		X67		X68		X69		X70		X71		X72		X73		X74		X75		X76		X77		X78		X79		X80		X81		X82		X83		X84		Y87.0		Z72.8		Z91.5
+		960 - 977		X60		X61		X62		X63		X64		X65		X66		X67		X68		X69		X70		X71		X72		X73		X74		X75		X76		X77		X78		X79		X80		X81		X82		X83		X84		Y87.0		Z72.8		Z91.5
 
-####Investigate a random sample from the dataset
+#### 2) Investigate a random sample from the dataset
 
-A random select of 145 clinical notes (data not shown; contact author for more info), each with the term "suici*" or "attempt" mentioned somewhere in the notes. 
+A random selection of 145 clinical notes (data not shown), each with the term "suici*" or "attempt" mentioned somewhere in the notes. 
 
 
 	suicide attempt*	attempt* suicide	suicidal behaviour
 	attemp to commit suicide	attempt to suicide	suicid* [0, 3] attempts	attempts [1, 4] suicid*	suicid* behaviour	suicid* gesture	attempt* at suicide	attempt to commit suicide	attempt to suicide	attempt at suicide	previous suicide attempt by jumping	previous suicide attempt by hanging	previous suicide attempt by taking	after a suicide attempt	previous attempt to jump off	tried to kill [him / her] self	suicide attempt failed	next time [he/she] attempts suicide	his suicide attempt was not successful	suicide attempt due to depression	following a suicide attempt	attempted to take [his/her] life	first attempt at [his/her] life	attempted to commit suicide	walked in front of motor	walked in front of vehicles	walked in front of moving	walked in front of traffic	attempt on his life	history of suicide attempt*	attempt[ed] / tried to hang herself / himself	overdose	self-poison	[Description of High number] tablets	cut, cutting, lacerat*, burning	hit[ting] herself / himself	burnt herself / himself	self-inflicted injury	submersion
 	
 
-#### Clinician Input
+#### 3) Clinician Input
 
-Three clinicians using the electronic health register (from which the research dataset is sourced) gave their input on the above lists and suggested the following
+Three clinicians, who are actively using the electronic health register in their day to day practice, reviewed the terms above and  gave their input on the above lists and added the following:
 
 	she / he jump[ing/ed] off a / in front of / from	she / he stood in front of a	attempt[ed] / tried to shoot herself / himself	attempt[ed] / tried to drown herself / himself	attempt[ed] / tried to strangle herself / himself
 	"intent"	"did you think you would die"
@@ -74,4 +72,20 @@ Three clinicians using the electronic health register (from which the research d
 
 
 
-The above lists were collated to form a Gazateer of terms that can be used to describe a suicide attempt in clinical notes. 
+The above lists were collated to form a Gazateer, which will be used to annotate and classify documents.
+ 
+|                       | **Gold Starndard** |             |         
+| -------------         | -------------      | ------------|
+| **Training Set**      |  Suicide Attempt   | Not a Suicide Attempt|
+| Suicide Attempt       |                    |             |        
+| Not a Suicide Attempt |                    |             |        
+
+
+
+###Next steps
+
+1) Annotate a gold standard set of documents using standard rules that define suicide attempt.
+
+2) Annotate a training set 
+
+3) Build models (using machine learning algorithms) and identify model of best fit, using precision and recall. 
