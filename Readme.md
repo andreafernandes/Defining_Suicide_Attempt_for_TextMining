@@ -85,10 +85,10 @@ The above lists were collated to form a Gazateer, which will be used to annotate
 ###Next steps
 
 1) Annotate a gold standard set of documents using standard rules that define suicide attempt.
-	Annotated 500 documents as the Gold Standard
-	Gold Standard documents had one of the 'suicide attempt' words or phrases mentioned. 
-	Following rules were followed:
-		To code as Positive, answer the following two questions:
+			Annotated 500 documents as the Gold Standard
+			Gold Standard documents had one of the 'suicide attempt' words or phrases mentioned. 
+			Following rules were followed:
+			To code as Positive, answer the following two questions:
 			- Is the reference to 'suicide attempt' a current/recent one? Or is it a reference to a past suicide attempt?
 
 			- if the answer to either of the questions above is 'Yes', then code the reference as 'positive'. Otherwise code as 'negative'/'unknown'. 
