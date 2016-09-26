@@ -1,0 +1,178 @@
+select * 
+
+INTO SQLCRIS_User.dbo.Afernandes_SuicideAttempt_Post_Processing
+
+from 
+
+
+-- The following table is culmination of validation exercises in which recurring negation 
+-- patterns, were identified (using data from the suicide attempt app), from 
+-- false positive examples 
+
+-- Main rule of the app. 
+
+-- This app should identify past suicide attempts and recent suicide attempts. But not
+-- theoretical suicide attempts (e.g. mentions of the terms as questions,
+-- in forms, by someone other than the patient) based on past or recent suicide attempts. 
+
+-- If the patient does not feel that an obvious suicide attempt was not a suicide attempt, 
+-- this will be counted as a positive (despite the negating vocabulary). 
+
+
+
+(
+
+select CN_Doc_ID, brcid, src_col, src_table, mlObservation1, contextString, match, id, MLpriority, prob
+
+from 
+
+(
+
+
+select *
+
+from [GateDB_Cris].[dbo].[gate_hunter_suicide_306]
+
+where id
+
+not in 
+
+(
+
+select id 
+
+from 
+(
+
+								(
+								select id, texty, match, contextString
+							
+								from 
+																			(
+																			select substring(contextString, 
+																							 1, 
+																							 ABS(CAST(contextStart as int) - CAST(annotStart as int))) as texty, 
+																				   *
+
+																			from [GateDB_Cris].[dbo].[gate_hunter_suicide_306]
+																			)TableTest
+
+
+								where (
+										--texty like '%denie[d/s] p[ast/revious]%' or 
+										--texty like '%denie[d/s] of%' or 
+										--texty like '%denie[d/s] h[aving/istory]%' or 
+										--texty like '%denie[d/s] any%' or 
+									  texty like '%denied previous%' or 
+									  texty like '%denies previous%' or 
+									  texty like '%denied past%' or 
+									  texty like '%denies past%' or 
+									  texty like '%denied of%' or 
+									  texty like '%denies of%' or 
+									  texty like '%denied having%' or 
+									  texty like '%denied having%' or 
+									  texty like '%denies history%' or 
+									  texty like '%denies history%' or 
+									  texty like '%denies a%' OR
+									  texty like '%denied a%' OR
+									  texty like '%nil' or
+									  --------------contextString like '%suicide attempt nil%' or
+									  -------------- contextString like '%suicide attempt none%' or
+									  --------------contextString like '%suicide attempt-nil%' or
+									  --------------contextString like '%suicide attempt-none%' or
+									  --------------contextString like '%suicide attempt:nil%' or
+									  --------------contextString like '%suicide attempt:none%' or
+									  --------------contextString like '%suicide attempt- nil%' or
+									  --------------contextString like '%suicide attempt- none%' or
+									  --------------contextString like '%suicide attempt -nil%' or
+									  --------------contextString like '%suicide attempt -none%' or
+									  --------------contextString like '%suicide attempt: nil%' or
+									  --------------contextString like '%suicide attempt: none%') or
+									  --------------contextString like '%suicide attempts- nil%' or 
+										texty like '%no past%' or
+										texty like '%never had any' or 
+										texty like '%never%' or
+										texty like '%no history of%' or 
+										texty like '%no hx of%' or 
+										texty like '%no history of actual%' or 
+										texty like '%no history of any%' or 
+										texty like '%no known past history of%' or 
+										texty like '%no known history of%' or 
+										texty like '%no recorded history of' or 
+										texty like '%no recent self-harm or' OR
+										texty like '%no self-harm or' OR
+										texty like '%no recent' or
+										texty like '%no documented history of%' or 
+										texty like '%no family history of%' or 
+										texty like '%no known history of%' or 
+										texty like '%no past history of%' or 
+										texty like '%no previous history of%' or 
+										texty like '%no significant history of' or
+										texty like '%no clear' or
+										--------------texty like '%none') or
+										texty like '%no' or
+										texty like '%risk of%' OR
+										texty like '%no previous' or
+										texty like '%nor is there any history of' or
+										texty like '%no attempts to' or 
+										texty like '%not expressed any' or 
+										texty like '%not made any' or 
+										texty like '%or' or
+										texty like '%would not' OR
+										texty like '%will not' OR
+										texty like '%going to' or
+										texty like '%/' or
+										texty like '%may' OR
+										match like '%Previously he attempt%' or 
+										match like '%previously also attempt%' or 
+										match like '%[0-9]%' or 
+										match like '%previous attempt%' or 
+										match like '%previously attempt%' or 
+										match like '%attempts at self-harm%' or
+										match like '%no attempt%' or 
+										match like '%not attempt%' or
+										match like '%no recent attempt%' or 
+										match like '%did not attempt%' or 
+										match like '%no actual%' or 
+										match like '%no previous%' or 
+										match like '%no suicid%' or 
+										match like '%no significant attempt%' or 
+										match like '%non%' or 
+										match like '%no history of%' or 
+										match like '%- no%' or 
+										match like '%no -%' or 
+										match like '%-no%' or 
+										match like '%no-%' or 
+										match like '%para%' or
+										contextString like '%Serious suicidal attempt and/or serious deliberate self-injury during the period rated%' or  
+										contextString like '%;Self harm or suicide attempts:%'  or 
+										contextString like '%*  *  Suicide attempts    *  *%'  or 
+										contextString like '%Suicide attempts, suicidal ideation, suicidal plans, self-harm/injury, substance misuse%' or  
+										contextString like '%Have you deliberately hurt yourself physically or made a suicide attempt%' or 
+										contextString like '%Do not include suicidal ideation or attempts%' or 
+										contextString like '%how many times has the client made a suicide attempt/engaged in%' or 
+										contextString like '%(not including DSH/suicidal behaviours)%' or
+										contextString like '%(1) Loss of confidence or self esteem%' or
+										contextString like '%no suicidal attempt%' or
+										contextString like '%no suicide attempt%' OR
+										contextString like '%Attempts: Methods:%' or 
+										contextString like '%Does the client have a history of suicide attempts?%' or
+										--contextString like '%have a history of suicide attempts?%' or
+										--texty like '%not' or 
+										--texty like '%no actual' or 
+										--texty like '%further' or 
+										--match like '%Suicide Previous suicide attempts%' or
+										contextString like '%Depression Q%' 
+
+									  ) 
+)
+
+) TableProcessed1
+
+) 
+
+)TableProcessed2
+
+) TableProcessed3
+
+---129791 ROWS AFFECTED
