@@ -1,8 +1,3 @@
-select * 
-
-INTO SQLCRIS_User.dbo.Afernandes_SuicideAttempt_Post_Processing
-
-from 
 
 
 -- The following table is culmination of validation exercises in which recurring negation 
@@ -18,9 +13,6 @@ from
 -- If the patient does not feel that an obvious suicide attempt was not a suicide attempt, 
 -- this will be counted as a positive (despite the negating vocabulary). 
 
-
-
-(
 
 select CN_Doc_ID, brcid, src_col, src_table, mlObservation1, contextString, match, id, MLpriority, prob
 
@@ -59,36 +51,20 @@ from
 
 
 								where (
-										--texty like '%denie[d/s] p[ast/revious]%' or 
-										--texty like '%denie[d/s] of%' or 
-										--texty like '%denie[d/s] h[aving/istory]%' or 
-										--texty like '%denie[d/s] any%' or 
-									  texty like '%denied previous%' or 
-									  texty like '%denies previous%' or 
-									  texty like '%denied past%' or 
-									  texty like '%denies past%' or 
-									  texty like '%denied of%' or 
-									  texty like '%denies of%' or 
-									  texty like '%denied having%' or 
-									  texty like '%denied having%' or 
-									  texty like '%denies history%' or 
-									  texty like '%denies history%' or 
-									  texty like '%denies a%' OR
-									  texty like '%denied a%' OR
-									  texty like '%nil' or
-									  --------------contextString like '%suicide attempt nil%' or
-									  -------------- contextString like '%suicide attempt none%' or
-									  --------------contextString like '%suicide attempt-nil%' or
-									  --------------contextString like '%suicide attempt-none%' or
-									  --------------contextString like '%suicide attempt:nil%' or
-									  --------------contextString like '%suicide attempt:none%' or
-									  --------------contextString like '%suicide attempt- nil%' or
-									  --------------contextString like '%suicide attempt- none%' or
-									  --------------contextString like '%suicide attempt -nil%' or
-									  --------------contextString like '%suicide attempt -none%' or
-									  --------------contextString like '%suicide attempt: nil%' or
-									  --------------contextString like '%suicide attempt: none%') or
-									  --------------contextString like '%suicide attempts- nil%' or 
+
+									  	texty like '%denied previous%' or 
+									  	texty like '%denies previous%' or 
+									  	texty like '%denied past%' or 
+									  	texty like '%denies past%' or 
+									  	texty like '%denied of%' or 
+									  	texty like '%denies of%' or 
+									  	texty like '%denied having%' or 
+									  	texty like '%denied having%' or 
+									  	texty like '%denies history%' or 
+									  	texty like '%denies history%' or 
+									  	texty like '%denies a%' OR
+									  	texty like '%denied a%' OR
+									  	texty like '%nil' or
 										texty like '%no past%' or
 										texty like '%never had any' or 
 										texty like '%never%' or
@@ -109,7 +85,6 @@ from
 										texty like '%no previous history of%' or 
 										texty like '%no significant history of' or
 										texty like '%no clear' or
-										--------------texty like '%none') or
 										texty like '%no' or
 										texty like '%risk of%' OR
 										texty like '%no previous' or
@@ -157,11 +132,6 @@ from
 										contextString like '%no suicide attempt%' OR
 										contextString like '%Attempts: Methods:%' or 
 										contextString like '%Does the client have a history of suicide attempts?%' or
-										--contextString like '%have a history of suicide attempts?%' or
-										--texty like '%not' or 
-										--texty like '%no actual' or 
-										--texty like '%further' or 
-										--match like '%Suicide Previous suicide attempts%' or
 										contextString like '%Depression Q%' 
 
 									  ) 
@@ -173,6 +143,5 @@ from
 
 )TableProcessed2
 
-) TableProcessed3
 
 ---129791 ROWS AFFECTED
