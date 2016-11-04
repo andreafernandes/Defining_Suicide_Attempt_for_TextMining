@@ -1,18 +1,17 @@
 
+-- Refinement of the Suicide Attempt Classifier
 
 -- The following query is a culmination of a series of exploratory exercises which investigated false positive instances 
--- from the suicide attempt classifier output, whereby an annotation was incorrectly labelled as a true
--- positive instead of a true negative. 
+-- from a suicide attempt classifier. Where a classification was incorrectly labelled as a true suicide attempt, 
+-- the text phrases on which the classifier was trained were excluded. 
 
--- Patterns in the text were identified and used as statements to exclude from the classifier's output. 
-
--- The following SQL query was written as part of a post-processing appendage to the current suicide attempt classifier 
--- algorithm. 
+-- The following SQL query was written as part of a post-processing (refinement) appendage to the current suicide attempt 
+-- classifier algorithm. 
 
 
 
 
---------------------------------------------POST-PROCESSING QUERY--------------------------------------------
+--------------------------------------------POST-PROCESSING OF SUICIDE ATTEMPT CLASSIFIER--------------------------------------------
 select *
 
 from [source].[dbo].[suicide_attempt_classifier_gate_output]
@@ -150,4 +149,4 @@ NOT IN
 
 ) TableProcessed2
 
---------------------------------------------POST-PROCESSING QUERY--------------------------------------------
+--------------------------------------------END OF QUERY--------------------------------------------
