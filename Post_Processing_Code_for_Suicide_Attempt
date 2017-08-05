@@ -1,5 +1,5 @@
 
--- Refinement of the Suicide Attempt Classifier
+-- Refinement of the Hybrid Machine Learning Suicide Attempt NLP Tool
 
 -- The following query is a culmination of a series of exploratory exercises which investigated false positive instances 
 -- from a suicide attempt classifier. Where a classification was incorrectly labelled as a true suicide attempt, 
@@ -11,7 +11,7 @@
 
 
 
---------------------------------------------POST-PROCESSING OF SUICIDE ATTEMPT CLASSIFIER--------------------------------------------
+------------------------------------------POST-PROCESSING OF THE SUICIDE ATTEMPT NLP TOOL------------------------------------------
 select *
 
 from [source].[dbo].[suicide_attempt_classifier_gate_output]
