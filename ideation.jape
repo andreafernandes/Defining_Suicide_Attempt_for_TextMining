@@ -1,0 +1,24 @@
+Phase: One
+Options: Control = appelt
+Input: Sentence Token negation deny
+
+Rule: AnnotateSentences
+Priority: 10
+(
+{
+	Sentence contains {Token.string =~ "[Ss]uicid"}, Sentence contains {Token.string =~"[Ii]deat"},Sentence notContains negation, Sentence notContains deny
+}
+) :match
+-->
+:match.Ideation = {rule="AnnotateSentences", Ideation = "Positve", Timeframe = "", Relevance = ""}
+
+
+Rule: AnnotateSentences
+Priority: 9
+(
+{
+	Sentence contains {Token.string =~ "[Ss]uicid"}, Sentence contains {Token.string =~"[Ii]deat"}
+}
+) :match
+-->
+:match.Ideation = {rule="AnnotateSentences", Ideation = "Negative", Timeframe = "", Relevance = ""}
